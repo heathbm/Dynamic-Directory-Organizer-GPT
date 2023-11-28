@@ -23,6 +23,11 @@ https://github.com/microsoft/hack-together-dotnet
 Use this app to chat with AI to organize files interactively.  
 Adjust until satisfied, then select a destination for the newly structured files to be copied to.  
 
+### Why did I pick this project idea?
+
+Like all developers, I find AI/GPT fascinating. However, I often consider these supplemental tools. They can provide code snippets, summarize research, generate images, and more. The results need to be inspected and the actions performed by the user.
+This was an attempt at harnessing the dynamic responses from AI/GPT and converting them into structured usable instructions that could be parsed by code. Allowing this tool to perform the tasks that AI/GPT is suggesting without the need for a user to perform the action manually.  
+
 ## Demo
 
 This repo comes with a folder with a few example files that can be used to easily demo the app: [ExampleFiles](./ExampleFiles/)
