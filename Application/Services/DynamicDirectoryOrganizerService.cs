@@ -14,25 +14,33 @@ namespace Application.Services
     {
         private async Task InitiateUserPromptFlow()
         {
-            Introduction();
+            try
+            {
+                Introduction();
 
-            // Directory with files that need organizing
-            string[] allFilesPaths = filesHelper.GetFilesFromUserInput();
-            filesHelper.PrintBreakDown(allFilesPaths);
-            Dictionary<string, string> fileToFullPathMap = filesHelper.CreateFileToFullPathMap(allFilesPaths);
-            string commaSeparatedListOfFileNames = filesHelper.CreateCommaSeparatedListOfFileNames(fileToFullPathMap.Keys);
+                // Directory with files that need organizing
+                string[] allFilesPaths = filesHelper.GetFilesFromUserInput();
+                filesHelper.PrintBreakDown(allFilesPaths);
+                Dictionary<string, string> fileToFullPathMap = filesHelper.CreateFileToFullPathMap(allFilesPaths);
+                string commaSeparatedListOfFileNames = filesHelper.CreateCommaSeparatedListOfFileNames(fileToFullPathMap.Keys);
 
-            // Destination folder
-            string destinationPath = filesHelper.GetDestinationPath();
-            string folderName = filesHelper.GetFolderName(destinationPath);
+                // Destination folder
+                string destinationPath = filesHelper.GetDestinationPath();
+                string folderName = filesHelper.GetFolderName(destinationPath);
 
-            // User and AI interactions
-            Dictionary<string, string> mappings = [];
-            await InitializeAiWithRoleAndFiles(commaSeparatedListOfFileNames);
-            UserFlowStateEnum finalUserChoice = await userInputAndAiMappingsRefiningService.RefineMappingsWithUserInputAndAi(mappings, folderName);
+                // User and AI interactions
+                Dictionary<string, string> mappings = [];
+                await InitializeAiWithRoleAndFiles(commaSeparatedListOfFileNames);
+                UserFlowStateEnum finalUserChoice = await userInputAndAiMappingsRefiningService.RefineMappingsWithUserInputAndAi(mappings, folderName);
 
-            // Finish
-            PerformFinalAction(mappings, finalUserChoice, destinationPath, fileToFullPathMap);
+                // Finish
+                PerformFinalAction(mappings, finalUserChoice, destinationPath, fileToFullPathMap);
+            }
+            catch (Exception ex)
+            {
+                console.WriteLine(ex.ToString());
+                lifetime.StopApplication();
+            }
         }
 
         private void Introduction()

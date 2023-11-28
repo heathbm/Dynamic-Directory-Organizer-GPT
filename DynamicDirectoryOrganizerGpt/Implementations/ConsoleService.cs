@@ -117,5 +117,10 @@ namespace DynamicDirectoryOrganizerGpt.Implementations
         {
             Console.WriteLine("");
         }
+
+        public void WriteLine(string text)
+        {
+            Console.WriteLine(text);
+        }
     }
 }

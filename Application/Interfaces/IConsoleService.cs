@@ -12,5 +12,6 @@ namespace Application.Interfaces
         string ProvideUserSelectionPrompt(params string[] subjects);
         void CreateSpinner(Task task);
         void PrintLineBreak();
+        void WriteLine(string text);
     }
 }
