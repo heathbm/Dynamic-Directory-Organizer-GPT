@@ -67,7 +67,7 @@ If running in Windows, please consider running from:
 - [Windows Terminal](https://apps.microsoft.com/detail/windows-terminal/9N0DX20HK701?hl=en-US&gl=US) (preferred)
 - PowerShell
 
-If you run this project from CMD, you will not be able to render the ASCII graphics.  
+If you run this project from CMD, you will not be able to render the unicode graphics.  
 
 When you are in the console, in the directory of [DynamicDirectoryOrganizerGpt.csproj](./DynamicDirectoryOrganizerGpt/DynamicDirectoryOrganizerGpt.csproj). Please run:  
 
