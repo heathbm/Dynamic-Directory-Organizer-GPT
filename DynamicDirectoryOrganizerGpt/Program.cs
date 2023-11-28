@@ -16,7 +16,12 @@ hostBuilder.ConfigureAppConfiguration((builder) => builder
 
 hostBuilder.ConfigureServices((context, services) =>
 {
-    services.Configure<Settings>(context.Configuration.GetSection("settings"));
+    services
+        .AddOptions<Settings>()
+        .Bind(context.Configuration.GetSection("settings"))
+        .ValidateOnStart()
+        .ValidateDataAnnotations();
+
     services.AddScoped<IConsoleService, ConsoleService>();
     services.ConfigureApplicationServices();
     services.ConfigureInfrastructureServices();

@@ -1,9 +1,16 @@
-﻿namespace Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Models
 {
     public class Settings
     {
-        public string? Key { get; set; }
-        public string? Endpoint { get; set; }
-        public string? Model { get; set; }
+        [Required(AllowEmptyStrings = false)]
+        public required string? Key { get; set; }
+
+        [Url]
+        public required string? Endpoint { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
+        public required string? Model { get; set; }
     }
 }
