@@ -1,4 +1,4 @@
-﻿using Application.Interfaces;
+using Application.Interfaces;
 using Application.Utilities;
 
 namespace Application.Services
@@ -46,11 +46,25 @@ namespace Application.Services
         public string CreateCommaSeparatedListOfFileNames(ICollection<string> fileNames) =>
             string.Join(",", fileNames.Select(file => $"'{file}'"));
 
-        public Dictionary<string, string> CreateFileToFullPathMap(string[] allFilesPaths) =>
-            allFilesPaths
-                .ToDictionary(
-                    filePath => Path.GetFileName(filePath)!,
-                    filePath => filePath);
+        public Dictionary<string, string> CreateFileToFullPathMap(string[] allFilesPaths)
+{
+    Dictionary<string, string> fileToFullPathMap = new Dictionary<string, string>();
+    int counter = 1;
+
+    foreach (string filePath in allFilesPaths)
+    {
+        string fileName = Path.GetFileName(filePath);
+
+        while (fileToFullPathMap.ContainsKey(fileName))
+        {
+            fileName = Path.GetFileNameWithoutExtension(filePath) + "_" + counter++ + Path.GetExtension(filePath);
+        }
+
+        fileToFullPathMap.Add(fileName, filePath);
+    }
+
+    return fileToFullPathMap;
+}
 
         public void PrintBreakDown(string[] allFiles)
         {
